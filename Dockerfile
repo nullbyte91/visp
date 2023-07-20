@@ -89,13 +89,13 @@ RUN cd ~/catkin_ws/src && \
 # Download Coppeliasim
 RUN apt-get install -y wget
 RUN mkdir -p ~/software/ && cd ~/software/ && \
-    wget https://www.coppeliarobotics.com/files/CoppeliaSim_Edu_V4_2_0_Ubuntu20_04.tar.xz && \
-    tar -xvf CoppeliaSim_Edu_V4_2_0_Ubuntu20_04.tar.xz -C ~/software/ 
+    wget https://www.coppeliarobotics.com/files/CoppeliaSim_Edu_V4_3_0_rev12_Ubuntu20_04.tar.xz && \
+    tar -xvf CoppeliaSim_Edu_V4_3_0_rev12_Ubuntu20_04.tar.xz -C ~/software/ 
 
-RUN cd ~/software/CoppeliaSim_Edu_V4_2_0_Ubuntu20_04/programming && mv libPlugin/ libPlugin_orig/
+RUN cd ~/software/CoppeliaSim_Edu_V4_3_0_rev12_Ubuntu20_04/programming && mv libPlugin/ libPlugin_orig/
 
 # Get the last version of libPlugin
-RUN cd ~/software/CoppeliaSim_Edu_V4_2_0_Ubuntu20_04/programming && \
+RUN cd ~/software/CoppeliaSim_Edu_V4_3_0_rev12_Ubuntu20_04/programming && \
     git clone https://github.com/CoppeliaRobotics/libPlugin.git --branch coppeliasim-v4.2.0 
     
 # Get ROSInterface node source code
@@ -107,9 +107,9 @@ RUN cd ~/catkin_ws/src/ && \
 RUN apt-get install -y python3-pip xsltproc 
 RUN pip3 install xmlschema
 RUN  . /opt/ros/noetic/setup.bash  && \
-    export COPPELIASIM_ROOT_DIR=~/software/CoppeliaSim_Edu_V4_2_0_Ubuntu20_04  && \
+    export COPPELIASIM_ROOT_DIR=~/software/CoppeliaSim_Edu_V4_3_0_rev12_Ubuntu20_04  && \
     cd ~/catkin_ws && catkin_make --cmake-args -DCMAKE_BUILD_TYPE=Release && \
-    cp devel/lib/libsimExtROS.so ~/software/CoppeliaSim_Edu_V4_2_0_Ubuntu20_04/
+    cp devel/lib/libsimExtROS.so ~/software/CoppeliaSim_Edu_V4_3_0_rev12_Ubuntu20_04/
 
 # Copy the entrypoint script into the container
 COPY ./entrypoint.sh /
